@@ -1,0 +1,41 @@
+.formInput, .formLabel{
+    display: block; 
+}
+
+.formItem{
+    margin: 0 0 10% 0; 
+}
+
+.formInput{
+    background-color: #ECE0D1;
+    border-radius: 10px;
+    height: 45px; 
+    width: 100%; 
+    border: none; 
+    padding: 1rem; 
+}
+
+.loginFormContainer{
+    width: 70%;  
+    max-width: 400px;
+}
+
+.loginButton{
+    background: #634832;
+    color: #FFFFFF; 
+    border-radius: 10px;
+    width: 145px; 
+    height: 50px; 
+    border: none;  
+    margin: auto; 
+}
+
+.smalltext{
+    font-size: 14px;
+    text-align: center;
+}
+
+.formItem input{
+    display: grid; 
+    margin: auto; 
+}
