@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital@1&family=Source+Sans+Pro:wght@400;700&display=swap');
+*{
+  box-sizing: border-box;
+  margin:0;
+  padding: 0; 
+}
+
+body {
+  margin: 0;
+  font-family: 'Source Sans Pro' ,-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  color: #38220F;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+    background-color: #DBC1AC;
+}
+
+h1{
+  font-family: Lora;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
