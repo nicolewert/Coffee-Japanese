@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 
 const Login = () =>{
-    const [user, setUser] = useState({name:"", email:""}); 
+    const [user, setUser] = useState({email:"", password:""}); 
     const [error, setError] = useState(""); 
 
     const Login = info =>{
