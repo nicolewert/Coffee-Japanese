@@ -14,12 +14,14 @@ const userSchema = new mongoose.Schema({
         required: true
     }, 
     rpassword : {
-        type: String, 
-        required: true
+        type: String
     }, 
     date: {
         type: Date, 
         default: Date.now
+    },
+    token: {
+        type: String
     }
 })
 
