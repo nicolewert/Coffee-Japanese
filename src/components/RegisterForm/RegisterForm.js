@@ -1,13 +1,10 @@
-import React, {useState} from 'react'; 
+import React from 'react';
 import classes from './RegisterForm.module.css'
+import useRegisterForm from './useRegisterForm'
+import validate from './validateUserInfo'
 
-const RegisterForm = ({SignUp, error}) => {
-    const [info, setInfo] = useState({username:"", email:"", password:"", rpassword: ""})
-
-    const submitHandler = (e) =>{
-        e.preventDefault(); 
-        SignUp(info)
-    }
+const RegisterForm = () => {
+    const {handleChange, userInfo, handleSubmit, errors, submitFailure} = useRegisterForm(validate)
 
     return(
         <form className={classes.registerFormContainer} onSubmit={submitHandler}>
