@@ -24,7 +24,7 @@ router.post('/register', async(req, res) => {
 
         const existingUser = await User.findOne({email})
         if (existingUser){
-            return res.status(409).send("User already exists. Please Login.")
+            return res.status(409).send("A user with this email already exists. Please Login.")
         }
 
         //Salt & Hash password 
