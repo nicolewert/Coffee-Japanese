@@ -18,6 +18,7 @@ const RegisterForm = () => {
                     value = {userInfo.username}
                     onChange = {handleChange}
                 />
+                {errors.username && <p>{errors.username}</p>}
             </div>
 
             <div className={classes.formItem}>
@@ -30,6 +31,7 @@ const RegisterForm = () => {
                     value = {userInfo.email}
                     onChange = {handleChange} 
                 />
+                {errors.email && <p>{errors.email}</p>}
             </div>
 
             <div className={classes.formItem}>
@@ -42,6 +44,7 @@ const RegisterForm = () => {
                     value = {userInfo.password} 
                     onChange = {handleChange}
                 />
+                {errors.password && <p>{errors.password}</p>}
             </div>
             <div className={classes.formItem}>
                 <label className={classes.formLabel}>Confirm Password</label>
@@ -53,11 +56,13 @@ const RegisterForm = () => {
                     value = {userInfo.rpassword}
                     onChange = {handleChange}
                 />
+                {errors.rpassword && <p>{errors.rpassword}</p>}
             </div>
             
             <div className={classes.formItem}>
                 <input className={classes.signUpButton} type="submit" value="Sign Up"/>
             </div>
+            {submitFailure.message && <div className={classes.submitError}>{submitFailure.message}</div>}
         </form>
     ); 
 }
