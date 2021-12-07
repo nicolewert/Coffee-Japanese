@@ -19,16 +19,16 @@ const useRegisterForm = (validate) =>{
         })
     }
 
-    const handleSubmit = e =>{
+    const handleSubmit = async e =>{
         e.preventDefault()
-        setErrors(validate(userInfo))
+        const errorsFound = await validate(userInfo)
+        setErrors(errorsFound)
         console.log(userInfo)
-        if(Object.keys(errors).length ===0){
+        if(Object.keys(errorsFound).length ===0){
             instance.post('/Register', userInfo)
             .then(res => {
                 console.log(res.data)
                 window.location ="/Home"
-                
             })
             .catch(error =>{
                 setSubmitFailure({message: error.response.data})
