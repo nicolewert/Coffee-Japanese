@@ -18,8 +18,8 @@ const Login = () =>{
                 <FontAwesomeIcon icon={faCoffee} className={classes.Icon}/>
                 <h1>Coffee Japanese</h1>
             </div>
-            <LoginForm Login={Login} error={error}/>
-            <p>Not already a member? <strong>Sign up here.</strong></p>
+            <LoginForm/>
+            <p>Not already a member? <a href="/Register">Register here</a></p>
         </div>
     );
 }
