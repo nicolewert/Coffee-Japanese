@@ -1,44 +1,44 @@
-import React, {useState} from 'react'; 
+import React from 'react'; 
 import classes from './LoginForm.module.css'
+import validate from './validateUserInfo'
+import useLoginForm from './useLoginForm';
 
-const LoginForm =({Login, error}) =>{
-    const [info, setInfo] = useState({email:"", password:""}) 
-
-    const submitHandler = e => {
-        e.preventDefault(); 
-        Login(info)
-    }
+const LoginForm =() =>{
+    const {handleChange, userInfo, handleSubmit, errors, submitFailure} = useLoginForm(validate)
 
     return(
-        <form onSubmit={submitHandler} className={classes.loginFormContainer}>
+        <form onSubmit={handleSubmit} className={classes.loginFormContainer}>
             <div className={classes.formItem}>
                 <label className={classes.formLabel}>Email</label>
                 <input
+                    id="email" 
                     className= {classes.formInput}
                     type="email"
                     name="email" 
-                    id="email" 
-                    onChange={e=>setInfo({...info, email: e.target.value})}
-                    value={info.email}
+                    value={userInfo.email}
+                    onChange={handleChange}
                 />
+                {errors.email && <p className={classes.inputError}>{errors.email}</p>}
             </div>
 
             <div className={classes.formItem}>
                 <label className={classes.formLabel}>Password</label>
                 <input 
+                    id="password"
                     className={classes.formInput}
                     type="password" 
                     name="password" 
-                    id="password"
-                    onChange={e=>setInfo({...info, password: e.target.value})}
-                    value={info.password}
+                    value={userInfo.password}
+                    onChange={handleChange}
                 />
+                {errors.password && <p className={classes.inputError}>{errors.password}</p>}
             </div>
 
             <div className={classes.formItem}>
                 <input className={classes.loginButton} type="submit" value="Login"/>
                 <p className={classes.smalltext}>Forgot Password?</p>
             </div>
+            {submitFailure.message && <div className={classes.submitError}>{submitFailure.message}</div>}
     </form>
     ); 
 }

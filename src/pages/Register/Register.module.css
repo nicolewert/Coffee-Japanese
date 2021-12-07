@@ -17,3 +17,9 @@
     text-align: center;
     margin-bottom: 5%;
 }
+
+.container a{
+    font-weight: bold;
+    text-decoration: none;
+    color:  #38220F;
+}
