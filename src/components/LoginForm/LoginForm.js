@@ -18,6 +18,7 @@ const LoginForm =() =>{
                     value={userInfo.email}
                     onChange={handleChange}
                 />
+                {errors.email && <p className={classes.inputError}>{errors.email}</p>}
             </div>
 
             <div className={classes.formItem}>
@@ -30,12 +31,14 @@ const LoginForm =() =>{
                     value={userInfo.password}
                     onChange={handleChange}
                 />
+                {errors.password && <p className={classes.inputError}>{errors.password}</p>}
             </div>
 
             <div className={classes.formItem}>
                 <input className={classes.loginButton} type="submit" value="Login"/>
                 <p className={classes.smalltext}>Forgot Password?</p>
             </div>
+            {submitFailure.message && <div className={classes.submitError}>{submitFailure.message}</div>}
     </form>
     ); 
 }
