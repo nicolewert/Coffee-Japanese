@@ -17,11 +17,12 @@ const useLoginForm = (validate) =>{
         })
     }
 
-    const handleSubmit = e =>{
+    const handleSubmit = async e =>{
         e.preventDefault()
-        setErrors(validate(userInfo))
+        const errorsFound = await validate(userInfo)
+        setErrors(errorsFound)
         console.log(userInfo)
-        if(Object.keys(errors).length ===0){
+        if(Object.keys(errorsFound).length === 0){
             instance.post('/Login', userInfo)
             .then(res =>{
                 console.log(res.data)
