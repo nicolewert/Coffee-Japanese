@@ -1,43 +1,44 @@
-.formInput, .formLabel{
-    display: block; 
+.formInput,
+.formLabel {
+  display: block;
 }
 
-.formItem{
-    margin: 0 0 10% 0; 
+.formItem {
+  margin: 0 0 10% 0;
 }
 
-.formInput{
-    background-color: #ECE0D1;
-    border-radius: 10px;
-    height: 45px; 
-    width: 100%; 
-    border: none; 
-    padding: 1rem; 
+.formInput {
+  background-color: #ece0d1;
+  border-radius: 10px;
+  height: 45px;
+  width: 100%;
+  border: none;
+  padding: 1rem;
 }
 
-.loginFormContainer{
-    width: 70%;  
-    max-width: 400px;
+.loginFormContainer {
+  width: 70%;
+  max-width: 400px;
 }
 
-.loginButton{
-    background: #634832;
-    color: #FFFFFF; 
-    border-radius: 10px;
-    width: 145px; 
-    height: 50px; 
-    border: none;  
-    margin: auto; 
+.loginButton {
+  background: #634832;
+  color: #ffffff;
+  border-radius: 10px;
+  width: 145px;
+  height: 50px;
+  border: none;
+  margin: auto;
 }
 
-.smalltext{
-    font-size: 14px;
-    text-align: center;
+.smalltext {
+  font-size: 14px;
+  text-align: center;
 }
 
-.formItem input{
-    display: grid; 
-    margin: auto; 
+.formItem input {
+  display: grid;
+  margin: auto;
 }
 
 .formItem .inputError {
