@@ -1,4 +1,5 @@
 import React from 'react'
+import DailyKanji from '../../components/DailyKanji/DailyKanji'
 
 const Home = () =>{
 
@@ -14,6 +15,9 @@ const Home = () =>{
                 <div className={classes.buttonContainer}>
                     <button className={classes.coffeeButton}>Coffee Time!</button>
                 </div>
+            </div>
+            <div className={classes.item}>
+                <DailyKanji/>
             </div>
     )
 }
