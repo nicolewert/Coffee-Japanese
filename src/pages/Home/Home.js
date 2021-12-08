@@ -1,5 +1,6 @@
 import React from 'react'
 import DailyKanji from '../../components/DailyKanji/DailyKanji'
+import StudyMotivation from '../../components/StudyMotivation.js/StudyMotivation'
 
 const Home = () =>{
 
@@ -19,6 +20,10 @@ const Home = () =>{
             <div className={classes.item}>
                 <DailyKanji/>
             </div>
+            <div className={classes.item}>
+                <StudyMotivation/>
+            </div>
+        </div>
     )
 }
 
