@@ -1,6 +1,7 @@
 import React from 'react'
 import DailyKanji from '../../components/DailyKanji/DailyKanji'
 import StudyMotivation from '../../components/StudyMotivation.js/StudyMotivation'
+import classes from './Home.module.css'
 
 const Home = () =>{
 
