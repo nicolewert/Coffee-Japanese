@@ -9,6 +9,9 @@ const DailyKanji = () => {
             <div className={classes.content}>
 
                 <div className={classes.kanjiSquareMaxSize}>
+                    <div className={classes.kanjiSquare}>
+                        <div className={classes.kanji}></div>
+                    </div>
                 </div>
                 <div className={classes.kanjiInfo}>
                     <div className={classes.infoItem}>
