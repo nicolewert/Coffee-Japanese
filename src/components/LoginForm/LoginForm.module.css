@@ -18,6 +18,7 @@
 
 .loginFormContainer {
   width: 100%;
+  max-width: 235.35px;
 }
 
 .loginButton {
