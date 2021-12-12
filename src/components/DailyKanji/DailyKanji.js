@@ -8,7 +8,11 @@ const DailyKanji = () => {
             <h3>Daily Kanji</h3>
             <div className={classes.content}>
 
-                <div className={classes.kanjiBlock}></div>
+                <div className={classes.kanjiSquareMaxSize}>
+                    <div className={classes.kanjiSquare}>
+                        <div className={classes.kanji}></div>
+                    </div>
+                </div>
                 <div className={classes.kanjiInfo}>
                     <div className={classes.infoItem}>
                         <p className={classes.infoHeading}>Definition:</p>
