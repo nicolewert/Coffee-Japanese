@@ -22,7 +22,6 @@
   top: 0;
   right: 0;
   transform: translateX(100%);
-  z-index: 2;
 }
 
 .sideNavActive {
@@ -35,12 +34,14 @@
   align-items: center;
   top: 0;
   right: 0;
+  z-index: 2;
 }
 
 .sideNavItem {
   list-style: none;
   margin: 50% 0;
   text-align: center;
+  font-weight: bold;
 }
 .sideNavItem a {
   text-decoration: none;
