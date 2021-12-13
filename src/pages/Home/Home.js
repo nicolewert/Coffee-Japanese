@@ -3,6 +3,7 @@ import DailyKanji from '../../components/DailyKanji/DailyKanji'
 import StudyMotivation from '../../components/StudyMotivation.js/StudyMotivation'
 import Navbar from '../../components/Navbar/Navbar'
 import classes from './Home.module.css'
+import Footer from '../../components/Footer/Footer'
 
 const Home = () =>{
 
@@ -27,6 +28,7 @@ const Home = () =>{
                     <StudyMotivation/>
                 </div>
             </div>
+            <Footer/>
         </>
     )
 }
