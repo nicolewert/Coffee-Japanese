@@ -4,6 +4,8 @@ const User = require('../../models/UserModel')
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
 const bcrypt = require('bcryptjs')
+const authToken = require('../../middleware/authToken')
+
 router.post('/login', async(req, res) =>{
     try{
         const {email, password} = req.body
@@ -33,3 +35,7 @@ router.post('/login', async(req, res) =>{
         res.status(500).send(err)
     }
 })
+
+router.get("/", authToken, (req, res)=>res.send('Auth Route'))
+
+module.exports = router; 
