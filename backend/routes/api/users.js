@@ -5,6 +5,10 @@ const jwt = require('jsonwebtoken')
 require('dotenv').config()
 const bcrypt = require('bcryptjs')
 
+
+// @route   POST route
+// @desc    Register a new user and get token
+// @access  Public
 router.post('/register', async(req, res) => { 
     try{
         const {username, email, password, rpassword} = req.body
