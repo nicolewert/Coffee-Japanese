@@ -12,5 +12,9 @@ mongoose.connect(process.env.DATABASE_ACCESS, () => console.log("Database connec
 
 app.use(express.json())
 app.use(cors())
-app.use('/app', routes)
-app.listen(4000, ()=>{console.log("server is up and running")})
+//Define Routes (route, location)
+app.use('/api/users', require('./routes/api/users'))
+app.use('/api/auth', require('./routes/api/auth'))
+app.use('/api/profile', require('./routes/api/profile'))
+app.use('/api/lessons', require('./routes/api/lessons'))
+
