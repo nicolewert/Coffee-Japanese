@@ -18,5 +18,6 @@ app.use('/api/users', require('./routes/api/users'))
 app.use('/api/auth', require('./routes/api/auth'))
 app.use('/api/profile', require('./routes/api/profile'))
 app.use('/api/lessons', require('./routes/api/lessons'))
+app.use('/api/home', require('./routes/api/home'))
 
 app.listen(4000, ()=>{console.log("server is up and running on port 4000")})
