@@ -1,7 +1,10 @@
 import {useState} from 'react'
-import instance from '../../axiosInstance/axios.js'
+import {useDispatch} from 'react-redux'
+import {register} from '../../actions/authAction'
 
 const useRegisterForm = (validate) =>{
+    const dispatch = useDispatch()
+    
     const [userInfo, setUserInfo] = useState({
         username:"", 
         email:"",
@@ -9,7 +12,6 @@ const useRegisterForm = (validate) =>{
         rpassword: ""
     })
     const [errors, setErrors] = useState({})
-    const [submitFailure, setSubmitFailure] = useState({message:""})
 
     const handleChange = e =>{
         const {name, value} = e.target 
@@ -21,23 +23,18 @@ const useRegisterForm = (validate) =>{
 
     const handleSubmit = async e =>{
         e.preventDefault()
+
+        //use frontend validation on userInfo
         const errorsFound = await validate(userInfo)
         setErrors(errorsFound)
-        console.log(userInfo)
+
+        //if no errors, dispatch register
         if(Object.keys(errorsFound).length ===0){
-            instance.post('/Register', userInfo)
-            .then(res => {
-                console.log(res.data)
-                window.location ="/Home"
-            })
-            .catch(error =>{
-                setSubmitFailure({message: error.response.data})
-                console.log(error)
-            })
+            dispatch(register(userInfo))
         }
     }
 
-    return {handleChange, userInfo, handleSubmit, errors, submitFailure}
+    return {handleChange, userInfo, handleSubmit, errors}
 }
 
 export default useRegisterForm
