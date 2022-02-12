@@ -44,7 +44,7 @@ router.post('/register', async(req, res) => {
             password: hashedPassword,
             token: token
         })
-        res.status(201).json({token: user.token})
+        res.status(201).json(token)
     } catch(err) {
         res.status(500).send(err)
     }

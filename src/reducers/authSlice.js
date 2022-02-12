@@ -13,6 +13,7 @@ function authReducer(state = initialState, action){
         case actionType.registerSuccess:
             return {
                 ...state,
+                token: localStorage.getItem('token'),
                 isAuthenticated: true, 
                 loading: false
             }
