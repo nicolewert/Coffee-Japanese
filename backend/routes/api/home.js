@@ -26,7 +26,21 @@ router.get("/", (req, res) =>{
     const kanjiAvailable = response.data.length
     const randomKanji = Math.floor((Math.random()*kanjiAvailable))  
     return homeData['kanji'] =  response.data[randomKanji].kanji.character
-  })
+  }).then(()=>{
+    let char =  homeData['kanji']
+    var encodedChar = encodeURI(char)
+    
+    var kanjiDetailOptions = {
+    method: 'GET',
+    url: `https://kanjialive-api.p.rapidapi.com/api/public/kanji/${encodedChar}`,
+    headers: {
+      'x-rapidapi-host': 'kanjialive-api.p.rapidapi.com',
+      'x-rapidapi-key': apiKey
+    }
+  };
+
+    return axios.request(kanjiDetailOptions).then(response => homeData['kanjiDetails'] = response.data)
+})
 
   let quoteOptions = {
     method: 'POST',
