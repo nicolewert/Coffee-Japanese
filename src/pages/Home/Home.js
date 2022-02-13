@@ -37,12 +37,7 @@ const Home = () =>{
     }
     
       //run effect and clean up only once by providing empty array as second arg
-      useEffect(()=>{
-        getHomeData()
-    }, [])
-
-     console.log(homeData)
-
+    useEffect(()=>{getHomeData()}, [])
    
     return(
         <>
