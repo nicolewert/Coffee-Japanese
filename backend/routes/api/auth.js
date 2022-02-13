@@ -4,7 +4,6 @@ const User = require('../../models/UserModel')
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
 const bcrypt = require('bcryptjs')
-const authToken = require('../../middleware/authToken')
 
 // @route   POST route
 // @desc    Login user and get token
@@ -39,9 +38,5 @@ router.post('/login', async(req, res) =>{
     }
 })
 
-// @route   GET route
-// @desc    Verify token authenticity 
-// @access  Private
-router.get("/", authToken, (req, res)=>res.send('Auth Route'))
 
 module.exports = router; 

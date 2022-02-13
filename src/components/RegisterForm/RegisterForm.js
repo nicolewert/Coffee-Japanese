@@ -2,9 +2,11 @@ import React from 'react';
 import classes from './RegisterForm.module.css'
 import useRegisterForm from './useRegisterForm'
 import validate from './validateUserInfo'
+import { useSelector } from 'react-redux';
 
 const RegisterForm = () => {
-    const {handleChange, userInfo, handleSubmit, errors, submitFailure} = useRegisterForm(validate)
+    const {handleChange, userInfo, handleSubmit, errors} = useRegisterForm(validate)
+    const submitFailure = useSelector((state)=> {return state.auth.error})
 
     return(
         <form className={classes.registerFormContainer} onSubmit={handleSubmit}> 
@@ -62,7 +64,7 @@ const RegisterForm = () => {
             <div className={classes.formItem}>
                 <input className={classes.signUpButton} type="submit" value="Sign Up"/>
             </div>
-            {submitFailure.message && <div className={classes.submitError}>{submitFailure.message}</div>}
+            {submitFailure? <div className={classes.submitError}>{submitFailure.message}</div>: <></>}
         </form>
     ); 
 }

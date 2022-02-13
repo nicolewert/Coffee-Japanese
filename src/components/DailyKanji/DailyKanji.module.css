@@ -1,6 +1,6 @@
 .content {
   display: flex;
-  gap: 5%;
+  gap: 7%;
   width: 100%;
 }
 
@@ -12,10 +12,15 @@
 
 .kanjiSquare {
   width: 100%;
-  padding-top: 100%;
   background: #ece0d1;
   border-radius: 10px;
   margin: 5% 0;
+}
+
+.kanji {
+  text-align: center;
+  font-size: 3rem;
+  padding: 30%;
 }
 
 .infoItem {
@@ -24,4 +29,9 @@
 
 .infoHeading {
   text-decoration: underline;
+  font-weight: 600;
+}
+
+.helperText {
+  font-size: 0.7rem;
 }

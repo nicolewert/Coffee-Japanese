@@ -1,12 +1,46 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import DailyKanji from '../../components/DailyKanji/DailyKanji'
 import StudyMotivation from '../../components/StudyMotivation.js/StudyMotivation'
 import Navbar from '../../components/Navbar/Navbar'
 import classes from './Home.module.css'
 import Footer from '../../components/Footer/Footer'
+import instance from '../../axiosInstance/axios'
+import { useSelector } from 'react-redux'
 
 const Home = () =>{
+    const token = useSelector((state)=>{
+        return state.auth.token
+    })
 
+    const [homeData, setHomeData] = useState()
+
+
+    const getHomeData = async()=>{
+        instance.get("/home/"
+        //Todo: add auth middleware back to api call and uncomment header
+        //, 
+        // {
+        //     headers: {
+        //         'x-auth-token': token
+        //     }
+        // }
+        )
+        .then(res =>{
+            setHomeData(res.data)
+        })
+        .catch(error =>{
+            console.log(error)
+        })
+    }
+    
+      //run effect and clean up only once by providing empty array as second arg
+      useEffect(()=>{
+        getHomeData()
+    }, [])
+
+     console.log(homeData)
+
+   
     return(
         <>
             <Navbar/>
@@ -22,10 +56,10 @@ const Home = () =>{
                     </div>
                 </div>
                 <div className={classes.item}>
-                    <DailyKanji/>
+                    <DailyKanji kanji={homeData}/>
                 </div>
                 <div className={classes.item}>
-                    <StudyMotivation/>
+                    <StudyMotivation quote={homeData}/>
                 </div>
             </div>
             <Footer/>
