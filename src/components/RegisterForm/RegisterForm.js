@@ -3,10 +3,17 @@ import classes from './RegisterForm.module.css'
 import useRegisterForm from './useRegisterForm'
 import validate from './validateUserInfo'
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterForm = () => {
     const {handleChange, userInfo, handleSubmit, errors} = useRegisterForm(validate)
     const submitFailure = useSelector((state)=> {return state.auth.error})
+    const isAuthenticated = useSelector((state)=>{return state.auth.isAuthenticated})
+
+    let navigate = useNavigate()
+    if (!submitFailure && isAuthenticated){
+        navigate("/home")
+    }
 
     return(
         <form className={classes.registerFormContainer} onSubmit={handleSubmit}> 
