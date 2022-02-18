@@ -1,30 +1,36 @@
-import React from 'react'; 
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'; 
+import React from 'react'
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import './App.css';
-import Home from './pages/Home/Home';
-import Login from './pages/Login/Login';
-import Register from './pages/Register/Register'
+import Home from './pages/Home/Home'
+import Login from './pages/Login/Login'
+import Register from './pages/Register/Register' 
 import CoffeeLesson from './pages/CoffeeLesson/CoffeeLesson'
+
+//Redux 
+import {Provider} from 'react-redux'; 
+import store from './store'; 
 
 function App() {
   return (
-    <Router>
-      <Routes>
+    <Provider store={store}>
+      <Router>
+        <Routes>
         
-        <Route path="/login" element={<Login/>}>
-        </Route>
+          <Route path="/login" element={<Login/>}>
+          </Route>
 
-        <Route path="/register" element={<Register/>}>
-        </Route>
+          <Route path="/register" element={<Register/>}>
+          </Route>
 
-        <Route path="/home" element={<Home/>}>
-        </Route>
+          <Route path="/home" element={<Home/>}>
+          </Route>
 
-        <Route path="/coffee-lesson" element={<CoffeeLesson/>}>
-        </Route>
+          <Route path="/coffee-lesson" element={<CoffeeLesson/>}>
+          </Route>
 
-      </Routes>
-    </Router>
+        </Routes>
+      </Router>
+    </Provider>
   );
 }
 

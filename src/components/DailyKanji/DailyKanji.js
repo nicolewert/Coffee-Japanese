@@ -1,7 +1,8 @@
 import React from 'react'
 import classes from './DailyKanji.module.css'
 
-const DailyKanji = () => {
+const DailyKanji = ({kanji}) => {
+
     return(
         <div className={classes.container}>
 
@@ -10,22 +11,31 @@ const DailyKanji = () => {
 
                 <div className={classes.kanjiSquareMaxSize}>
                     <div className={classes.kanjiSquare}>
-                        <div className={classes.kanji}></div>
+                        <div className={classes.kanji}>{kanji && kanji.kanji}</div>
                     </div>
                 </div>
+
                 <div className={classes.kanjiInfo}>
                     <div className={classes.infoItem}>
                         <p className={classes.infoHeading}>Definition:</p>
-                        {<p>Stuff</p>}
+                        <p>{kanji && kanji.kanjiDetails.kanji.meaning.english}</p>
                     </div>
+
+            
                     <div className={classes.infoItem}>
-                        <p className={classes.infoHeading}>On/ Example:</p>
-                        {<p>Stuff</p>}
+                        <p className={classes.infoHeading}>On:</p>
+                        <p>{kanji && kanji.kanjiDetails.kanji.onyomi.katakana.toString()}</p>
+                       
                     </div>
-                    <div className={classes.infoItem}>
+
+                    {kanji && kanji.kanjiDetails.kanji.kunyomi.hiragana.toString()
+                    ?<div className={classes.infoItem}>
                         <p className={classes.infoHeading}>Kun:</p>
-                        {<p>Stuff</p>}
+                        <p>{kanji.kanjiDetails.kanji.kunyomi.hiragana.toString()}</p>
                     </div>
+                    :<></>
+                    }
+
                 </div>
 
             </div>
