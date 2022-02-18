@@ -6,6 +6,7 @@ import classes from './Home.module.css'
 import Footer from '../../components/Footer/Footer'
 import instance from '../../axiosInstance/axios'
 import { useSelector } from 'react-redux'
+import {useNavigate} from 'react-router-dom'
 
 const Home = () =>{
     const token = useSelector((state)=>{
@@ -13,8 +14,10 @@ const Home = () =>{
     })
 
     const [homeData, setHomeData] = useState()
-
-
+    let navigate = useNavigate(); 
+    const handleClick = (e) =>{
+        navigate("/coffee-lesson")
+    } 
     const getHomeData = async()=>{
         instance.get("/home/"
         //Todo: add auth middleware back to api call and uncomment header
@@ -34,12 +37,7 @@ const Home = () =>{
     }
     
       //run effect and clean up only once by providing empty array as second arg
-      useEffect(()=>{
-        getHomeData()
-    }, [])
-
-     console.log(homeData)
-
+    useEffect(()=>{getHomeData()}, [])
    
     return(
         <>
@@ -52,7 +50,7 @@ const Home = () =>{
                 <div className={classes.item}>
                     <p>Brew yourself a coffee and click coffee time to start your lesson!</p>
                     <div className={classes.buttonContainer}>
-                        <button className={classes.coffeeButton}>Coffee Time!</button>
+                        <button className={classes.coffeeButton} onClick={handleClick}>Coffee Time!</button>
                     </div>
                 </div>
                 <div className={classes.item}>
