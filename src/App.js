@@ -6,6 +6,7 @@ import Login from './pages/Login/Login'
 import Register from './pages/Register/Register' 
 import CoffeeLesson from './pages/CoffeeLesson/CoffeeLesson'
 import PrivateRoute from './components/ProtectiveRouting/PrivateRoute';
+import PageNotFound from './pages/PageNotFound/PageNotFound'
 
 //Redux 
 import {Provider} from 'react-redux'; 
@@ -31,8 +32,7 @@ function App() {
               element={<PrivateRoute component={CoffeeLesson}/>}
             />
 
-          <Route path="/coffee-lesson" element={<CoffeeLesson/>}>
-          </Route>
+            <Route path="*" element={<PageNotFound/>}></Route>
 
         </Routes>
       </Router>
