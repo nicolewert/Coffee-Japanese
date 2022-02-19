@@ -20,10 +20,14 @@
 
 .coffeeButton {
   background: #634832;
-  color: #ffffff;
   border-radius: 10px;
   width: 145px;
   height: 50px;
   border: none;
   margin-top: 5%;
+}
+
+.linkText {
+  text-decoration: none;
+  color: #ffffff;
 }
