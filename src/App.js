@@ -5,6 +5,7 @@ import Home from './pages/Home/Home'
 import Login from './pages/Login/Login'
 import Register from './pages/Register/Register' 
 import CoffeeLesson from './pages/CoffeeLesson/CoffeeLesson'
+import PrivateRoute from './components/ProtectiveRouting/PrivateRoute';
 
 //Redux 
 import {Provider} from 'react-redux'; 
@@ -16,14 +17,19 @@ function App() {
       <Router>
         <Routes>
         
-          <Route path="/login" element={<Login/>}>
-          </Route>
+            <Route path="/login" element={<Login/>}/>
 
-          <Route path="/register" element={<Register/>}>
-          </Route>
+            <Route path="/register" element={<Register/>}/>
 
-          <Route path="/home" element={<Home/>}>
-          </Route>
+            <Route 
+              path="/home" 
+              element={<PrivateRoute component ={Home}/>}
+            />
+
+            <Route 
+              path="/coffee-lesson" 
+              element={<PrivateRoute component={CoffeeLesson}/>}
+            />
 
           <Route path="/coffee-lesson" element={<CoffeeLesson/>}>
           </Route>
