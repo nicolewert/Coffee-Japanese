@@ -6,7 +6,7 @@ import classes from './Home.module.css'
 import Footer from '../../components/Footer/Footer'
 import instance from '../../axiosInstance/axios'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const Home = () =>{
     const token = useSelector((state)=>{
@@ -36,6 +36,7 @@ const Home = () =>{
       //run effect and clean up only once by providing empty array as second arg
     useEffect(()=>{getHomeData()}, [])
    
+    const navigate = useNavigate()
     return(
         <>
             <Navbar/>
@@ -47,9 +48,7 @@ const Home = () =>{
                 <div className={classes.item}>
                     <p>Brew yourself a coffee and click coffee time to start your lesson!</p>
                     <div className={classes.buttonContainer}>
-                        <button className={classes.coffeeButton}>
-                            <Link className={classes.linkText}to="/coffee-lesson">Coffee Time!</Link>
-                        </button>
+                        <button className={classes.coffeeButton} onClick={()=>navigate("/coffee-lesson")}>Coffee Time!</button>
                     </div>
                 </div>
                 <div className={classes.item}>
