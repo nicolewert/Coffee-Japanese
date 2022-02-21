@@ -18,13 +18,16 @@ const Navbar = () =>{
             <FontAwesomeIcon icon={faTimes} className={classes.icon +" "+ classes.sideNavClose} onClick={toggleSideNav}/>
             <ul>
                 <li className={classes.sideNavItem}>
+                    <a href="/home">Home</a>
+                </li>
+                {/* <li className={classes.sideNavItem}>
                     <a href="/">User Profile</a>
                 </li>
                 <li className={classes.sideNavItem}>
                     <a href="/">Contact Us</a>
-                </li>
+                </li> */}
                 <li className={classes.sideNavItem}>
-                    <a href="/login">Logout</a>
+                    <a href="/">Logout</a>
                 </li>
             </ul>
         </div>
