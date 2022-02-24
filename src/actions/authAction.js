@@ -28,4 +28,9 @@ export const login = (userInfo, setLoginError) =>async dispatch =>{
     })
 }
 
+export const logout = () => dispatch =>{
+    localStorage.removeItem('token')
+    dispatch({
+        type: actionType.logout
+    })
 }

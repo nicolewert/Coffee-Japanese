@@ -2,11 +2,13 @@ import React, {useState} from 'react'
 import classes from './Navbar.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoffee, faBars, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { logout } from '../../actions/authAction'
+import { useDispatch } from 'react-redux'
 
 const Navbar = () =>{
     const [sideNav, setSideNav] = useState(false)
     const toggleSideNav = () => setSideNav(!sideNav)
-
+    const dispatch = useDispatch()
     return(
         <>
         <nav className={classes.navbar}>
@@ -27,7 +29,10 @@ const Navbar = () =>{
                     <a href="/">Contact Us</a>
                 </li> */}
                 <li className={classes.sideNavItem}>
-                    <a href="/">Logout</a>
+                    <a onClick={()=>{
+                        dispatch(logout())
+                        }
+                    } href="/">Logout</a>
                 </li>
             </ul>
         </div>
