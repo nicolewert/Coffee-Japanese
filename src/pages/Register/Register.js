@@ -13,7 +13,7 @@ const Register = () => {
                 <h1>Coffee Japanese</h1>
             </div>
         <RegisterForm/>
-        <p>Already a member? <a href="/Login">Login here</a></p>
+        <p>Already a member? <a href="/">Login here</a></p>
     </div>
     );
 }
