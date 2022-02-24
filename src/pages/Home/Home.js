@@ -5,13 +5,13 @@ import Navbar from '../../components/Navbar/Navbar'
 import classes from './Home.module.css'
 import Footer from '../../components/Footer/Footer'
 import instance from '../../axiosInstance/axios'
-import { useSelector } from 'react-redux'
+// import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 const Home = () =>{
-    const token = useSelector((state)=>{
-        return state.auth.token
-    })
+    // const token = useSelector((state)=>{
+    //     return state.auth.token
+    // })
 
     const [homeData, setHomeData] = useState()
 
