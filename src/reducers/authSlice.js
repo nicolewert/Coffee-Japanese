@@ -1,16 +1,16 @@
 import * as actionType from "../actions/types"
 
 const initialState = {
-    token: localStorage.getItem('token'),
+    token: null,
     isAuthenticated: false, 
-    loading: true, 
-    error: null
+    loading: true
 }
 function authReducer(state = initialState, action){
     
-    const {type, payload} = action; 
+    const {type} = action; 
     switch(type){
         case actionType.registerSuccess:
+        case actionType.loginSuccess:
             return {
                 ...state,
                 token: localStorage.getItem('token'),
@@ -22,8 +22,7 @@ function authReducer(state = initialState, action){
                 ...state, 
                 token: null, 
                 isAuthenticated: false,
-                loading: false, 
-                error: payload
+                loading: false 
             }
         default: 
             return state; 

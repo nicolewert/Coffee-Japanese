@@ -1,13 +1,15 @@
 import {useState} from 'react'
-import instance from '../../axiosInstance/axios'
+import { useDispatch } from 'react-redux'
+import { login } from '../../actions/authAction'
 
 const useLoginForm = (validate) =>{
+    const dispatch = useDispatch()
+
     const [userInfo, setUserInfo] = useState({
         email: "", 
         password: ""
     })
     const [errors, setErrors] = useState({})
-    const [submitFailure, setSubmitFailure] = useState({message:""})
 
     const handleChange = e => {
         const {name, value} = e.target
@@ -17,25 +19,21 @@ const useLoginForm = (validate) =>{
         })
     }
 
+    const setLoginError = (error) =>{
+        setErrors(error)
+    } 
+
     const handleSubmit = async e =>{
         e.preventDefault()
         const errorsFound = await validate(userInfo)
         setErrors(errorsFound)
-        console.log(userInfo)
+
         if(Object.keys(errorsFound).length === 0){
-            instance.post('/Login', userInfo)
-            .then(res =>{
-                console.log(res.data)
-                window.location ="/Home"
-            })
-            .catch(error => {
-                setSubmitFailure({message:  error.response.data})
-                console.log(error)
-            })
+            dispatch(login(userInfo, setLoginError))
         }
     }
 
-    return {handleChange, userInfo, handleSubmit, errors, submitFailure}
+    return {handleChange, userInfo, handleSubmit, errors}
 }
 
 export default useLoginForm

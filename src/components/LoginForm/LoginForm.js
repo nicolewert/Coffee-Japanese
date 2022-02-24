@@ -1,10 +1,20 @@
-import React from 'react'; 
+import React, { useEffect } from 'react'; 
 import classes from './LoginForm.module.css'
 import validate from './validateUserInfo'
 import useLoginForm from './useLoginForm';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm =() =>{
-    const {handleChange, userInfo, handleSubmit, errors, submitFailure} = useLoginForm(validate)
+    const {handleChange, userInfo, handleSubmit, errors} = useLoginForm(validate)
+    const isAuthenticated = useSelector((state)=>{return state.auth.isAuthenticated})
+
+    let navigate = useNavigate()
+    useEffect(() =>{
+        if(isAuthenticated){
+            navigate("/home")
+        }
+    })
 
     return(
         <form onSubmit={handleSubmit} className={classes.loginFormContainer}>
@@ -36,9 +46,9 @@ const LoginForm =() =>{
 
             <div className={classes.formItem}>
                 <input className={classes.loginButton} type="submit" value="Login"/>
-                <p className={classes.smalltext}>Forgot Password?</p>
+                {/* <p className={classes.smalltext}>Forgot Password?</p> */}
             </div>
-            {submitFailure.message && <div className={classes.submitError}>{submitFailure.message}</div>}
+            {errors.loginError && <div className={classes.submitError}>{errors.loginError}</div>}
     </form>
     ); 
 }

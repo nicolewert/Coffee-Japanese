@@ -29,8 +29,7 @@ router.post('/login', async(req, res) =>{
             } else{
                 //If passwords match, create access token
                 const token = jwt.sign({ username: user.username }, process.env.TOKEN_SECRET,{expiresIn: "3h"})
-                user.token = token
-                res.status(200).json({token: user.token})
+                res.status(200).json(token)
             }
         }
     } catch(err){

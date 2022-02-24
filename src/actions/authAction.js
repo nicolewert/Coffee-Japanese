@@ -10,13 +10,22 @@ export const register = (userInfo) => async dispatch => {
         })
      })
     .catch(error =>{
+
+export const login = (userInfo, setLoginError) =>async dispatch =>{
+    instance.post('/auth/login', userInfo)
+    .then(res =>{
+        localStorage.setItem('token', res.data);
+        dispatch({
+            type: actionType.loginSuccess,
+        })
+        return {}
+    })
+    .catch(error => {
+        setLoginError({"loginError": error.response.data})
         dispatch({
             type: actionType.authFailure,
-            payload: {
-                "status": error.response.status,
-                "message": error.response.data 
-            }
         })
     })
+}
 
 }
