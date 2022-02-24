@@ -1,7 +1,7 @@
 import instance from '../axiosInstance/axios';
 import * as actionType from './types'; 
 
-export const register = (userInfo) => async dispatch => { 
+export const register = (userInfo, setRegisterError) => async dispatch => { 
     instance.post('/users/register', userInfo)
     .then(res => {
         localStorage.setItem('token', res.data);
@@ -10,6 +10,13 @@ export const register = (userInfo) => async dispatch => {
         })
      })
     .catch(error =>{
+        setRegisterError({"registerError": error.response.data})
+        dispatch({
+            type: actionType.authFailure
+        })
+    })
+
+}
 
 export const login = (userInfo, setLoginError) =>async dispatch =>{
     instance.post('/auth/login', userInfo)

@@ -21,6 +21,10 @@ const useRegisterForm = (validate) =>{
         })
     }
 
+    const setRegisterError = (error) =>{
+        setErrors(error)
+    }
+     
     const handleSubmit = async e =>{
         e.preventDefault()
 
@@ -30,7 +34,7 @@ const useRegisterForm = (validate) =>{
 
         //if no errors, dispatch register
         if(Object.keys(errorsFound).length ===0){
-            dispatch(register(userInfo))
+            dispatch(register(userInfo, setRegisterError))
         }
     }
 
