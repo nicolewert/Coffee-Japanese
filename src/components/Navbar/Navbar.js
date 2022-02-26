@@ -29,10 +29,13 @@ const Navbar = () =>{
                     <a href="/">Contact Us</a>
                 </li> */}
                 <li className={classes.sideNavItem}>
-                    <a onClick={()=>{
+                    <button className={classes.logoutButton}
+                     onClick={()=>{
                         dispatch(logout())
                         }
-                    } href="/">Logout</a>
+                    }
+                    >Logout
+                    </button>
                 </li>
             </ul>
         </div>
