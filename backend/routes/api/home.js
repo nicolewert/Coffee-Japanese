@@ -10,7 +10,7 @@ const apiKey = process.env.API_KEY
 // @route   GET route
 // @desc    Return home page requested external api data
 // @access  Private
-router.get("/", (req, res) =>{
+router.get("/", async(req, res) =>{
   var homeData = {}; 
   let kanjiOptions = {
             method: 'GET',
@@ -26,7 +26,7 @@ router.get("/", (req, res) =>{
     const kanjiAvailable = response.data.length
     const randomKanji = Math.floor((Math.random()*kanjiAvailable))  
     return homeData['kanji'] =  response.data[randomKanji].kanji.character
-  }).then(()=>{
+  }).then(async()=>{
     let char =  homeData['kanji']
     var encodedChar = encodeURI(char)
     
@@ -57,7 +57,7 @@ router.get("/", (req, res) =>{
     return homeData['quote'] = response.data
   })
   
-  Promise.all([kanji(), quote()]).then(()=>res.json(homeData))
+  await Promise.all([kanji(), quote()]).then(()=>res.json(homeData))
 })
 
 module.exports = router; 
