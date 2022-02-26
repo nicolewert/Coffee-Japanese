@@ -8,6 +8,7 @@ export const register = (userInfo, setRegisterError) => async dispatch => {
         dispatch({
             type: actionType.registerSuccess,
         })
+        return {}
      })
     .catch(error =>{
         setRegisterError({"registerError": error.response.data})
