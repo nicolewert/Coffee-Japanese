@@ -1,0 +1,41 @@
+.formContainer {
+  width: 100%;
+  max-width: 235.35px;
+}
+
+.formInput,
+.formLabel {
+  display: block;
+}
+
+.formItem {
+  margin: 0 0 10% 0;
+}
+
+.formInput {
+  background-color: #ece0d1;
+  border-radius: 10px;
+  height: 50px;
+  width: 100%;
+  border: none;
+  padding: 1rem;
+}
+
+.formItem:last-child {
+  padding-top: 25%;
+}
+
+.formItem input {
+  display: grid;
+  margin: auto;
+}
+
+.saveButton {
+  background: #634832;
+  color: #ffffff;
+  border-radius: 10px;
+  width: 145px;
+  height: 50px;
+  border: none;
+  margin: auto;
+}
