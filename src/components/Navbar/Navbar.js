@@ -22,10 +22,10 @@ const Navbar = () =>{
                 <li className={classes.sideNavItem}>
                     <a href="/home">Home</a>
                 </li>
-                {/* <li className={classes.sideNavItem}>
-                    <a href="/">User Profile</a>
-                </li>
                 <li className={classes.sideNavItem}>
+                    <a href="/user-profile">User Profile</a>
+                </li>
+                {/* <li className={classes.sideNavItem}>
                     <a href="/">Contact Us</a>
                 </li> */}
                 <li className={classes.sideNavItem}>
