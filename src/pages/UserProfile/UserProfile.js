@@ -33,7 +33,7 @@ const UserProfile = () =>{
 
             <div className={classes.linkGroup}>
                 <p className={classes.linkItem}>
-                    <Link to="/" className={classes.link}>
+                    <Link to="/edit-user-profile" className={classes.link}>
                     <FontAwesomeIcon icon={faPenToSquare} className={classes.icon}/>
                     Edit User Info</Link>
                 </p>
