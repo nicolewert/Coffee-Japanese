@@ -16,6 +16,10 @@ const userSchema = new mongoose.Schema({
     rpassword : {
         type: String
     }, 
+    japaneseLevel :{
+        type: Number,
+        default: 1
+    },
     date: {
         type: Date, 
         default: Date.now
