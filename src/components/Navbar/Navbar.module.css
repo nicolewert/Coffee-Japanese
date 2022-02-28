@@ -43,11 +43,13 @@
   text-align: center;
   font-weight: bold;
 }
-.sideNavItem a {
+.sideNavItem a,
+.logoutButton {
   text-decoration: none;
   color: #38220f;
 }
-.sideNavItem a:hover {
+.sideNavItem a:hover,
+.logoutButton:hover {
   color: #967259;
 }
 
@@ -55,6 +57,12 @@
   position: fixed;
   top: 3%;
   left: 3%;
+}
+
+.logoutButton {
+  background: none;
+  border: none;
+  font-weight: bold;
 }
 
 @media (min-width: 1000px) {
@@ -70,7 +78,8 @@
     left: 65%;
   }
 
-  .sideNavItem a:hover {
+  .sideNavItem a:hover,
+  .logoutButton:hover {
     color: #dbc1ac;
   }
 }
