@@ -39,7 +39,7 @@ const UserProfile = () =>{
                 </p>
 
                 <p className={classes.linkItem}>
-                    <Link to="/" className={classes.link}>
+                    <Link to="/change-password" className={classes.link}>
                     <FontAwesomeIcon icon={faLock} className={classes.icon}/>
                     Change Password?</Link>
                 </p>
