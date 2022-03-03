@@ -13,7 +13,7 @@ const UserProfile = () =>{
     <Navbar/>
 
     <div className={classes.userInfoContainer}>
-        <h2>Profile</h2>
+        <h2 className={classes.title}>Profile</h2>
 
         <div className={classes.infoGroup}>
             <div className={classes.infoItem}>
@@ -39,7 +39,7 @@ const UserProfile = () =>{
                 </p>
 
                 <p className={classes.linkItem}>
-                    <Link to="/" className={classes.link}>
+                    <Link to="/change-password" className={classes.link}>
                     <FontAwesomeIcon icon={faLock} className={classes.icon}/>
                     Change Password?</Link>
                 </p>

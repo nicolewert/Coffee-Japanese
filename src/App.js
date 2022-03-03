@@ -7,6 +7,7 @@ import Register from './pages/Register/Register'
 import CoffeeLesson from './pages/CoffeeLesson/CoffeeLesson'
 import UserProfile from './pages/UserProfile/UserProfile';
 import EditUserProfile from './pages/EditUserProfile/EditUserProfile';
+import ChangePassword from './pages/ChangePassword/ChangePassword';
 import PrivateRoute from './components/ProtectiveRouting/PrivateRoute';
 import PageNotFound from './pages/PageNotFound/PageNotFound'
 
@@ -45,6 +46,11 @@ function App() {
               <Route 
                 path="/edit-user-profile" 
                 element={<PrivateRoute component={EditUserProfile}/>}
+              />
+
+              <Route 
+                path="/change-password" 
+                element={<PrivateRoute component={ChangePassword}/>}
               />
 
               <Route path="*" element={<PageNotFound/>}></Route>
