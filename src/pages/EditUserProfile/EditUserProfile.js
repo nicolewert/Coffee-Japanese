@@ -9,7 +9,7 @@ const EditUserProfile = () => {
         <>
         <Navbar/>
         <div className={classes.container}>
-            <h2>Edit User Profile</h2>
+            <h2 className={classes.title}>Edit User Profile</h2>
             <EditUserProfileForm/>
         </div>
         <Footer/>

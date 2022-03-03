@@ -13,7 +13,7 @@ const UserProfile = () =>{
     <Navbar/>
 
     <div className={classes.userInfoContainer}>
-        <h2>Profile</h2>
+        <h2 className={classes.title}>Profile</h2>
 
         <div className={classes.infoGroup}>
             <div className={classes.infoItem}>
