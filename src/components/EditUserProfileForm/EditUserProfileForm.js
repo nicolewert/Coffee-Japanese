@@ -2,9 +2,13 @@ import React from 'react'
 import classes from './EditUserProfileForm.module.css'
 import validate from './validateUserInfo'
 import useEditUserProfileForm from './useEditUserProfileForm'
+import { useSelector } from 'react-redux'
 
 const EditUserProfileForm = () =>{
     const {handleChange, userInfo, handleSubmit, errors} = useEditUserProfileForm(validate)
+    const user = useSelector(state =>{
+        return state.user.user
+    })
 
     return (
         <form onSubmit={handleSubmit} className={classes.formContainer}>
@@ -15,7 +19,7 @@ const EditUserProfileForm = () =>{
                 className = {classes.formInput}
                 type = "text" 
                 name = "username"
-                placeholder='Cat' //Todo: replace with user data
+                placeholder={user.username}
                 value = {userInfo.username}
                 onChange = {handleChange}
             />
@@ -28,7 +32,7 @@ const EditUserProfileForm = () =>{
                 className = {classes.formInput}
                 type = "email" 
                 name = "email"
-                placeholder='cat@cat.co'
+                placeholder={user.email}
                 value = {userInfo.email}
                 onChange = {handleChange} 
             />
@@ -40,16 +44,15 @@ const EditUserProfileForm = () =>{
                 id="japaneseLevel"
                 className={classes.formInput}
                 name="japaneseLevel"
-                value={userInfo.japaneseLevel} // 1 = Beginner (N5) --> must translate to int 
+                value={userInfo.japaneseLevel}
                 onChange={handleChange}
             >
-                <option>Beginner (N5)</option>
-                <option>Low-Intermediate (N4)</option>
-                <option>Hight-Intermediate (N3)</option>
-                <option>Advanced (N2)</option>
-                <option>Fluent (N1)</option>
+                <option value={1}>Beginner (N5)</option>
+                <option value={2}>Low-Intermediate (N4)</option>
+                <option value={3}>Hight-Intermediate (N3)</option>
+                <option value={4}>Advanced (N2)</option>
+                <option value={5}>Fluent (N1)</option>
             </select>
-
         </div>
         
         <div className={classes.formItem}>
