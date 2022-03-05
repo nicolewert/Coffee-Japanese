@@ -4,6 +4,8 @@ const User = require('../../models/UserModel')
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
 const bcrypt = require('bcryptjs')
+const authToken = require('../../middleware/authToken')
+const mongoose = require('mongoose')
 
 
 // @route   POST route
@@ -49,5 +51,24 @@ router.post('/register', async(req, res) => {
         res.status(500).send(err)
     }
 })
+
+// @route   GET route
+// @desc    Get a user by id
+// @access  Private
+router.get('/getUser', authToken, async(req, res)=>{ 
+    try{
+        const userID = mongoose.Types.ObjectId(req.id)
+         
+        const user = await User.findById(userID)
+        if (!user){
+            return res.status(400).json("User not found")
+        }
+        
+        res.status(201).json(user)
+    } catch(err){
+        res.status(500).send(err)
+    }
+})
+
 
 module.exports = router; 
