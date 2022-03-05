@@ -28,7 +28,7 @@ router.post('/login', async(req, res) =>{
                 res.status(400).send("Invalid Credentials")
             } else{
                 //If passwords match, create access token
-                const token = jwt.sign({ username: user.username }, process.env.TOKEN_SECRET,{expiresIn: "3h"})
+                const token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET,{expiresIn: "3h"})
                 res.status(200).json(token)
             }
         }

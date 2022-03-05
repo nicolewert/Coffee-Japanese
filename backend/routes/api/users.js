@@ -34,15 +34,16 @@ router.post('/register', async(req, res) => {
         //Salt & Hash password 
         const hashedPassword = await bcrypt.hash(password, 10)
         
-        //Create access token
-        const token = jwt.sign({ username: username }, process.env.TOKEN_SECRET,{expiresIn: "3h"})
-        
         //Create user in db
         const user = await User.create({
             username: username,
             email: email.toLowerCase(),
             password: hashedPassword
         })
+
+        //Create access token
+        const token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET,{expiresIn: "3h"})
+        
         res.status(201).json(token)
     } catch(err) {
         res.status(500).send(err)
