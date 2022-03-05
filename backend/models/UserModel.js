@@ -11,10 +11,8 @@ const userSchema = new mongoose.Schema({
     }, 
     password: {
         type: String, 
-        required: true
-    }, 
-    rpassword : {
-        type: String
+        required: true, 
+        select: false
     }, 
     japaneseLevel :{
         type: Number,

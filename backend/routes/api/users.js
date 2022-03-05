@@ -4,6 +4,8 @@ const User = require('../../models/UserModel')
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
 const bcrypt = require('bcryptjs')
+const authToken = require('../../middleware/authToken')
+const mongoose = require('mongoose')
 
 
 // @route   POST route
@@ -34,19 +36,39 @@ router.post('/register', async(req, res) => {
         //Salt & Hash password 
         const hashedPassword = await bcrypt.hash(password, 10)
         
-        //Create access token
-        const token = jwt.sign({ username: username }, process.env.TOKEN_SECRET,{expiresIn: "3h"})
-        
         //Create user in db
         const user = await User.create({
             username: username,
             email: email.toLowerCase(),
             password: hashedPassword
         })
+
+        //Create access token
+        const token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET,{expiresIn: "3h"})
+        
         res.status(201).json(token)
     } catch(err) {
         res.status(500).send(err)
     }
 })
+
+// @route   GET route
+// @desc    Get a user by id
+// @access  Private
+router.get('/getUser', authToken, async(req, res)=>{ 
+    try{
+        const userID = mongoose.Types.ObjectId(req.id)
+         
+        const user = await User.findById(userID)
+        if (!user){
+            return res.status(400).json("User not found")
+        }
+        
+        res.status(201).json(user)
+    } catch(err){
+        res.status(500).send(err)
+    }
+})
+
 
 module.exports = router; 
