@@ -19,3 +19,18 @@ export const getUser = (token) =>async dispatch =>{
         })
     })
 }
+
+export const updateUser = (userInfo, setEditUserError, token) =>async dispatch =>{
+    instance.patch('/users/partialUpdateUser', {userInfo: userInfo}, {
+        headers:{
+            'x-auth-token':token
+        }
+    })
+    .then( ()=>{
+        dispatch(getUser(token))
+        return {}
+    })
+    .catch(error=>{
+            setEditUserError(error)
+    })
+}
