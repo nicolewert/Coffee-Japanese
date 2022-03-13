@@ -70,5 +70,42 @@ router.get('/getUser', authToken, async(req, res)=>{
     }
 })
 
+// @route   PATCH route
+// @desc    Partially update a user by id
+// @access  Private
+router.patch('/partialUpdateUser', authToken, async(req, res)=>{
+    try{
+        const {username, email, japaneseLevel} = req.body.userInfo
+        let changes = {}
 
-module.exports = router; 
+        //Validate userInfo
+        if(email){
+            if( !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
+                return res.status(400).send("Invalid Email.")
+            }
+
+            const existingUser = await User.findOne({email})
+            if (existingUser){
+                return res.status(409).send("A user with this email already exists. Please choose a different email.")        
+            }
+
+            changes["email"] = email
+        }
+        if (username) changes["username"] = username
+        if (japaneseLevel) changes["japaneseLevel"] = japaneseLevel
+
+        //Update user in db
+        const userID= mongoose.Types.ObjectId(req.id)
+        const result = await User.findByIdAndUpdate(userID, {$set: changes})
+        
+        if (result.modifiedCount ===0){
+            return res.status(409).send("Failed to edit user info")
+        }
+        
+        res.status(201).json("User successfully updated")
+    }catch(err){
+        res.status(500).send(err)
+    }
+})
+
+module.exports = router;
