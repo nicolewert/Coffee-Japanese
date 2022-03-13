@@ -7,7 +7,7 @@ const Footer = () => {
     return(
         <div className={classes.footer}>
             <FontAwesomeIcon icon={faCoffee}  className={classes.icon}/>
-            <p className={classes.copyright}>© 2021 Coffee Japanese</p>
+            <p className={classes.copyright}>© 2022 Coffee Japanese</p>
         </div>
     )
 }
