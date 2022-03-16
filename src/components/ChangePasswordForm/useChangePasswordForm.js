@@ -1,12 +1,14 @@
 import { useState } from "react"
+import { useDispatch, useSelector } from 'react-redux'
+import { error } from "../../actions/types"
 
 const useChangePasswordForm = validate =>{
+    const dispatch = useDispatch()
     const [passwordInfo, setPasswordInfo] = useState({
         oldpassword: "", 
         newpassword: "", 
         rpassword: ""
     })
-    const [errors, setErrors] = useState({})
 
     const handleChange = e =>{
         const {name, value} = e.target 
@@ -16,24 +18,19 @@ const useChangePasswordForm = validate =>{
         })
     }
 
-    const setChangePasswordError = (error) =>{
-        setErrors(error)
-    }
-
     const handleSubmit = async e =>{
         e.preventDefault()
 
-        //use frontend validation on passwordInfo
-        const errorsFound = await validate(passwordInfo)
-        setErrors(errorsFound)
 
-        //if no errors, dispatch register
-        if(Object.keys(errorsFound).length ===0){
-            //todo call backend
+        if( passwordInfo.oldpassword || passwordInfo.newpassword || passwordInfo.rpassword){
+            const errorsFound = await validate(passwordInfo)
+            if(Object.keys(errorsFound).length>0) {
+                dispatch({type: error, payload: errorsFound})
+            }else{
         }
     }
 
-    return {handleChange, passwordInfo, handleSubmit, errors}
+    return {handleChange, passwordInfo, handleSubmit}
 }
 
 export default useChangePasswordForm
