@@ -64,7 +64,7 @@ router.get('/getUser', authToken, async(req, res)=>{
             return res.status(400).json("User not found")
         }
         
-        res.status(201).json(user)
+        res.status(200).json(user)
     } catch(err){
         res.status(500).send(err)
     }
@@ -102,7 +102,41 @@ router.patch('/partialUpdateUser', authToken, async(req, res)=>{
             return res.status(409).send("Failed to edit user info")
         }
         
-        res.status(201).json("User successfully updated")
+        res.status(200).json("User successfully updated")
+    }catch(err){
+        res.status(500).send(err)
+    }
+})
+
+// @route   PATCH route
+// @desc    Update a user's password
+// @access  Private
+router.patch('/changeUserPassword', authToken, async(req, res)=>{
+    try{
+        const {oldpassword, newpassword, rpassword} = req.body.passwordInfo
+        const userID = mongoose.Types.ObjectId(req.id)
+        const user = await User.findById(userID).select("+password")
+
+        //compare currentPassword with db password 
+        const passwordsMatch = await bcrypt.compare(oldpassword, user.password)
+        if (!passwordsMatch){
+            return res.status(400).send("Current password is incorrect")
+        }
+        
+        //check if newPassword matches rpassword
+        if(newpassword !== rpassword){
+            return res.status(400).send("New password and confirm password must match.")
+        }
+
+        //hash new password and save to db
+        const hashedNewPassword = await bcrypt.hash(newpassword, 10)
+        const result = await User.findByIdAndUpdate(userID, {$set: {"password": hashedNewPassword}})
+
+        if (result.modifiedCount ===0){
+            return res.status(409).send("Failed to change user password")
+        }
+
+        res.status(200).json("User password successfully changed")
     }catch(err){
         res.status(500).send(err)
     }

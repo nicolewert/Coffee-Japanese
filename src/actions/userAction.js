@@ -39,3 +39,22 @@ export const updateUser = (userInfo, token) =>async dispatch =>{
         })
     })
 }
+
+export const changeUserPassword = (passwordInfo, token) => async dispatch =>{
+    instance.patch('/users/changeUserPassword', {passwordInfo: passwordInfo},{
+        headers:{
+            'x-auth-token':token
+        }
+    })
+    .then(()=>{
+        dispatch({
+            type: actionType.success
+        })
+    })
+    .catch(error=>{
+        dispatch({
+            type: actionType.error, 
+            payload: {"changePasswordError": error.response.data}
+        })
+    })
+}
