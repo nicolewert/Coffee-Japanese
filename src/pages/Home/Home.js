@@ -5,38 +5,38 @@ import Navbar from '../../components/Navbar/Navbar'
 import classes from './Home.module.css'
 import Footer from '../../components/Footer/Footer'
 import instance from '../../axiosInstance/axios'
-// import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 const Home = () =>{
-    // const token = useSelector((state)=>{
-    //     return state.auth.token
-    // })
+    const navigate = useNavigate()
+
+    const token = useSelector((state)=>{
+        return state.auth.token
+    })
+
+    const japaneseLevel = useSelector(state =>{
+        return state.user.user.japaneseLevel
+    })
 
     const [homeData, setHomeData] = useState()
 
-    const getHomeData = async()=>{
-        instance.get("/home/"
-        //Todo: add auth middleware back to api call and uncomment header
-        //, 
-        // {
-        //     headers: {
-        //         'x-auth-token': token
-        //     }
-        // }
-        )
+    useEffect(()=>{
+        instance.get("/home/",
+        {
+            headers: {
+                'x-auth-token': token,
+                'japanese-level': japaneseLevel
+            }
+        })
         .then(res =>{
             setHomeData(res.data)
         })
         .catch(error =>{
             console.log(error)
         })
-    }
-    
-      //run effect and clean up only once by providing empty array as second arg
-    useEffect(()=>{getHomeData()}, [])
-   
-    const navigate = useNavigate()
+    }, [token, japaneseLevel])
+
     return(
         <>
             <Navbar/>
