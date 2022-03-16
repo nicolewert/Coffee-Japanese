@@ -3,10 +3,12 @@ import authReducer from "./authSlice"
 import { logout } from '../actions/types'
 import storage from 'redux-persist/lib/storage'
 import userReducer from './userSlice'
+import errorReducer from './errorSlice'
 
 const appReducers = combineReducers({
     auth: authReducer,
-    user: userReducer
+    user: userReducer,
+    error: errorReducer
 })
 
 const rootReducer = (state, action) =>{
