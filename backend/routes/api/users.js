@@ -64,7 +64,7 @@ router.get('/getUser', authToken, async(req, res)=>{
             return res.status(400).json("User not found")
         }
         
-        res.status(201).json(user)
+        res.status(200).json(user)
     } catch(err){
         res.status(500).send(err)
     }
@@ -102,6 +102,12 @@ router.patch('/partialUpdateUser', authToken, async(req, res)=>{
             return res.status(409).send("Failed to edit user info")
         }
         
+        res.status(200).json("User successfully updated")
+    }catch(err){
+        res.status(500).send(err)
+    }
+})
+
 // @route   PATCH route
 // @desc    Update a user's password
 // @access  Private
