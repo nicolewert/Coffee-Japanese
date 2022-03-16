@@ -1,16 +1,27 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import classes from './EditUserProfileForm.module.css'
 import validate from './validateUserInfo'
 import useEditUserProfileForm from './useEditUserProfileForm'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
 
 const EditUserProfileForm = () =>{
     const {handleChange, userInfo, handleSave} = useEditUserProfileForm(validate)
+    
+    let navigate = useNavigate()
+    
     const user = useSelector(state =>{
         return state.user.user
     })
     const error = useSelector(state=>{
         return state.error
+    })
+
+    useEffect(()=>{
+        if(!error.error && error.errorChecked===true){
+            navigate('/user-profile')
+        }
     })
 
     return (

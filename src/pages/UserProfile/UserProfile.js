@@ -1,14 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navbar from '../../components/Navbar/Navbar'
 import Footer from '../../components/Footer/Footer'
 import classes from './UserProfile.module.css'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPenToSquare, faLock } from '@fortawesome/free-solid-svg-icons'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { errorReset } from '../../actions/types'
+
+
 const UserProfile = () =>{
     const user = useSelector( state =>{
         return state.user.user
+    })
+
+    let dispatch = useDispatch()
+    useEffect(()=>{
+        dispatch({
+            type: errorReset
+        })
     })
 
     const japaneseLevelNumToText = (num) =>{
