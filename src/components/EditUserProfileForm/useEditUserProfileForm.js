@@ -2,8 +2,10 @@ import {useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {updateUser} from '../../actions/userAction'
 import { useNavigate } from 'react-router-dom'
+import { error } from '../../actions/types'
 
 const useEditUserProfileForm = (validate) =>{
+
     const dispatch = useDispatch()
     const navigate = useNavigate()
     
@@ -16,7 +18,6 @@ const useEditUserProfileForm = (validate) =>{
         email:"", 
         japaneseLevel:""
     })
-    const [errors, setErrors] = useState({})
 
     const handleChange = e =>{
         const {name, value} = e.target 
@@ -25,10 +26,6 @@ const useEditUserProfileForm = (validate) =>{
             [name]: value 
         })
     }
-
-    const setEditUserError = (error) =>{
-        setErrors(error)
-    }
      
     const handleSave = async e =>{
         e.preventDefault()
@@ -36,21 +33,18 @@ const useEditUserProfileForm = (validate) =>{
         Object.keys(userInfo).forEach( key => userInfo[key].trim())
 
         if(userInfo.username || userInfo.email|| userInfo.japaneseLevel){
-            //use frontend validation on userInfo
             const errorsFound = await validate(userInfo)
-            setErrors(errorsFound)
+            dispatch({type: error, payload: errorsFound})
 
-            //if no errors, update
             if(Object.keys(errorsFound).length ===0){ 
-                dispatch(updateUser(userInfo, setEditUserError, token))
-                .then(()=> navigate("/user-profile"))
-            }    
-        }
-        
-        navigate("/user-profile")      
+                dispatch(updateUser(userInfo, token))                
+            }  
+        }else{
+            navigate("/user-profile")
+        }      
     }
 
-    return {handleChange, userInfo, handleSave, errors}
+    return {handleChange, userInfo, handleSave}
 }
 
 export default useEditUserProfileForm

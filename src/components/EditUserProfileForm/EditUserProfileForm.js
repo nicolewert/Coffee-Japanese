@@ -5,13 +5,16 @@ import useEditUserProfileForm from './useEditUserProfileForm'
 import { useSelector } from 'react-redux'
 
 const EditUserProfileForm = () =>{
-    const {handleChange, userInfo, handleSubmit, errors} = useEditUserProfileForm(validate)
+    const {handleChange, userInfo, handleSave} = useEditUserProfileForm(validate)
     const user = useSelector(state =>{
         return state.user.user
     })
+    const error = useSelector(state=>{
+        return state.error
+    })
 
     return (
-        <form onSubmit={handleSubmit} className={classes.formContainer}>
+        <form onSubmit={handleSave} className={classes.formContainer}>
         <div className={classes.formItem}>
             <label className={classes.formLabel}>Username</label>
             <input 
@@ -36,6 +39,7 @@ const EditUserProfileForm = () =>{
                 value = {userInfo.email}
                 onChange = {handleChange} 
             />
+            {error.error && error.error.email && <p className={classes.inputError}>{error.error.email}</p>}
         </div>
 
         <div className={classes.formItem}>
@@ -54,10 +58,10 @@ const EditUserProfileForm = () =>{
                 <option value={5}>Fluent (N1)</option>
             </select>
         </div>
-        
         <div className={classes.formItem}>
             <input className={classes.saveButton} type="submit" value="Save"/>
         </div>
+        { error.error && error.error.updateError && <div className={classes.saveError}>{error.error.updateError}</div>}
     </form>
     )
 }

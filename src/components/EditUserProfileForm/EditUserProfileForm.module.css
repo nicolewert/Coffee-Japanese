@@ -30,6 +30,10 @@
   margin: auto;
 }
 
+.formItem .inputError {
+  color: red;
+}
+
 .saveButton {
   background: #634832;
   color: #ffffff;
@@ -38,4 +42,12 @@
   height: 50px;
   border: none;
   margin: auto;
+}
+
+.saveError {
+  text-align: center;
+  background-color: rgba(255, 0, 0, 0.404);
+  padding: 5% 0;
+  border-radius: 10px;
+  border: 3px solid rgba(255, 0, 0, 0.609);
 }
