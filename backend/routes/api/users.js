@@ -116,7 +116,7 @@ router.patch('/changeUserPassword', authToken, async(req, res)=>{
         const {oldpassword, newpassword, rpassword} = req.body.passwordInfo
         const userID = mongoose.Types.ObjectId(req.id)
         const user = await User.findById(userID).select("+password")
-        console.log(oldpassword)
+
         //compare currentPassword with db password 
         const passwordsMatch = await bcrypt.compare(oldpassword, user.password)
         if (!passwordsMatch){
