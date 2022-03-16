@@ -21,7 +21,7 @@ export default function validatePasswordInfo(passwordInfo){
     if(!passwordInfo.rpassword){
         errors.rpassword = "Confirm new password is required"
     }
-    else if(passwordInfo.newPassword !== passwordInfo.rpassword){
+    else if(passwordInfo.newpassword !== passwordInfo.rpassword){
         errors.rpassword = "Passwords must match"
     }
     return errors
