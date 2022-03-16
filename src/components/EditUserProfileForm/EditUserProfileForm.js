@@ -48,14 +48,14 @@ const EditUserProfileForm = () =>{
                 id="japaneseLevel"
                 className={classes.formInput}
                 name="japaneseLevel"
-                value={userInfo.japaneseLevel}
+                value={userInfo.japaneseLevel || user.japaneseLevel}
                 onChange={handleChange}
             >
-                <option value={1}>Beginner (N5)</option>
-                <option value={2}>Low-Intermediate (N4)</option>
-                <option value={3}>Hight-Intermediate (N3)</option>
-                <option value={4}>Advanced (N2)</option>
-                <option value={5}>Fluent (N1)</option>
+                <option value="1">Beginner (N5)</option>
+                <option value="2">Low-Intermediate (N4)</option>
+                <option value="3">Hight-Intermediate (N3)</option>
+                <option value="4">Advanced (N2)</option>
+                <option value="5">Fluent (N1)</option>
             </select>
         </div>
         <div className={classes.formItem}>
