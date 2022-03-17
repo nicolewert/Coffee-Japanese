@@ -3,13 +3,23 @@ import Navbar from '../../components/Navbar/Navbar'
 import Footer from '../../components/Footer/Footer'
 import classes from './CoffeeLesson.module.css'
 import instance from '../../axiosInstance/axios'
+import { useSelector } from 'react-redux'
 import { authFailureError } from '../../middleware/authFailureCheck'
 
 const CoffeeLesson  = () =>{
     const [lesson, setLesson] = useState()
+    
+    const token = useSelector((state)=>{
+        return state.auth.token
+    })
 
-    const getLesson = async()=>{
-        instance.get("/lessons")
+    useEffect(()=>{
+        instance.get("/lessons", 
+        {
+            headers: {
+                'x-auth-token': token,
+            }
+        })
         .then(res =>{
             setLesson(res.data)
         })
@@ -17,9 +27,7 @@ const CoffeeLesson  = () =>{
             authFailureError(error)
             console.log(error)
         })
-    }
-
-    useEffect(()=>{getLesson()},[])
+    },[token])
     
     return(
         <>
