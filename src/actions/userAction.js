@@ -1,5 +1,6 @@
 import instance from '../axiosInstance/axios'
 import * as actionType from './types'
+import { logout } from './authAction'
 
 export const getUser = (token) =>async dispatch =>{
     instance.get('/users/getUser', {
@@ -55,6 +56,29 @@ export const changeUserPassword = (passwordInfo, token) => async dispatch =>{
         dispatch({
             type: actionType.error, 
             payload: {"changePasswordError": error.response.data}
+        })
+    })
+}
+
+export const deleteUser = (password, token) => async dispatch=>{
+    instance.delete('/users/deleteUser', {
+        headers:{
+            'x-auth-token':token
+        },
+        data:{
+            password: password
+        }
+    })
+    .then(()=>{
+        dispatch({
+            type: actionType.success
+        })
+        dispatch(logout())
+    })
+    .catch(error=>{
+        dispatch({
+            type: actionType.error,
+            payload: {"deleteAccountError": error.response.data}
         })
     })
 }
