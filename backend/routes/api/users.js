@@ -144,7 +144,7 @@ router.patch('/changeUserPassword', authToken, async(req, res)=>{
 // @access  Private
 router.delete('/deleteUser', authToken, async(req, res)=>{
     try{
-        const oldpassword = req.data.password
+        const oldpassword = req.body.password
         const userID = mongoose.Types.ObjectId(req.id)
         const user = await User.findById(userID).select("+password")
 

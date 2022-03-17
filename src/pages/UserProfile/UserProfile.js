@@ -4,7 +4,7 @@ import Footer from '../../components/Footer/Footer'
 import classes from './UserProfile.module.css'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPenToSquare, faLock } from '@fortawesome/free-solid-svg-icons'
+import { faPenToSquare, faLock, faUserXmark } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { errorReset } from '../../actions/types'
 
@@ -72,6 +72,11 @@ const UserProfile = () =>{
                     <Link to="/change-password" className={classes.link}>
                     <FontAwesomeIcon icon={faLock} className={classes.icon}/>
                     Change Password?</Link>
+                </p>
+                <p className={classes.linkItem}>
+                    <Link to="/delete-account" className={classes.link}>
+                    <FontAwesomeIcon icon={faUserXmark} className={classes.icon}/>
+                    Delete Account</Link>
                 </p>
             </div>
         </div>
