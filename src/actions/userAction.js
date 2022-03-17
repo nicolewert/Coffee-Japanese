@@ -1,6 +1,7 @@
 import instance from '../axiosInstance/axios'
 import * as actionType from './types'
 import { logout } from './authAction'
+import { authFailureError } from '../middleware/authFailureCheck'
 
 export const getUser = (token) =>async dispatch =>{
     instance.get('/users/getUser', {
@@ -14,7 +15,8 @@ export const getUser = (token) =>async dispatch =>{
             payload: res.data
         })
     })
-    .catch(()=>{
+    .catch((error)=>{
+        authFailureError(error)
         dispatch({
             type: actionType.userError
         })
@@ -34,6 +36,7 @@ export const updateUser = (userInfo, token) =>async dispatch =>{
         })
     })
     .catch(error=>{
+        authFailureError(error)
         dispatch({
             type:actionType.error,
             payload: {"updateError": error.response.data} 
@@ -53,6 +56,7 @@ export const changeUserPassword = (passwordInfo, token) => async dispatch =>{
         })
     })
     .catch(error=>{
+        authFailureError(error)
         dispatch({
             type: actionType.error, 
             payload: {"changePasswordError": error.response.data}
@@ -76,6 +80,7 @@ export const deleteUser = (password, token) => async dispatch=>{
         dispatch(logout())
     })
     .catch(error=>{
+        authFailureError(error)
         dispatch({
             type: actionType.error,
             payload: {"deleteAccountError": error.response.data}

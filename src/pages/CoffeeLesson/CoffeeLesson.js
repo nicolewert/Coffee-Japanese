@@ -3,6 +3,7 @@ import Navbar from '../../components/Navbar/Navbar'
 import Footer from '../../components/Footer/Footer'
 import classes from './CoffeeLesson.module.css'
 import instance from '../../axiosInstance/axios'
+import { authFailureError } from '../../middleware/authFailureCheck'
 
 const CoffeeLesson  = () =>{
     const [lesson, setLesson] = useState()
@@ -13,6 +14,7 @@ const CoffeeLesson  = () =>{
             setLesson(res.data)
         })
         .catch(error =>{
+            authFailureError(error)
             console.log(error)
         })
     }
