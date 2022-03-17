@@ -1,0 +1,53 @@
+.userInfoContainer {
+  width: 100vw;
+  height: 100%;
+  min-height: 82vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #38220f;
+}
+
+.title {
+  margin-bottom: 4rem;
+}
+
+.infoGroup {
+  width: 50%;
+  max-width: 300px;
+}
+
+.infoItem {
+  margin: 4% 0;
+}
+
+.label {
+  margin: 1% 0;
+}
+
+.infoBox {
+  background: #ece0d1;
+  border-radius: 10px;
+  padding: 0 0 0 2%;
+  min-height: 3rem;
+  padding: 6%;
+}
+
+.linkGroup {
+  text-align: center;
+  margin: 15% 0;
+}
+
+.linkItem {
+  margin: 7% 0;
+}
+
+.link {
+  text-decoration: none;
+  color: #38220f;
+}
+
+.icon {
+  margin-right: 3%;
+}

@@ -4,45 +4,44 @@ var axios = require("axios").default;
 const authToken = require('../../middleware/authToken')
 const dotenv = require('dotenv')
 
-dotenv.config()
-const apiKey = process.env.API_KEY
-
 // @route   GET route
 // @desc    Return home page requested external api data
 // @access  Private
-router.get("/", (req, res) =>{
-  var homeData = {}; 
-  let kanjiOptions = {
-            method: 'GET',
-            url: 'https://kanjialive-api.p.rapidapi.com/api/public/search/advanced/',
-            params: {grade: '1'},
-            headers: {
-              'x-rapidapi-host': 'kanjialive-api.p.rapidapi.com',
-              'x-rapidapi-key': apiKey
-            }
-    }; 
+router.get("/", authToken, async(req, res) =>{
+  //get Api key from environmental variables
+  dotenv.config()
+  const apiKey = process.env.API_KEY
 
-  const kanji =async() => axios.request(kanjiOptions).then(response =>{
-    const kanjiAvailable = response.data.length
-    const randomKanji = Math.floor((Math.random()*kanjiAvailable))  
-    return homeData['kanji'] =  response.data[randomKanji].kanji.character
-  }).then(()=>{
-    let char =  homeData['kanji']
-    var encodedChar = encodeURI(char)
-    
-    var kanjiDetailOptions = {
+  //get japaneseLevel from headers
+  let japaneseLevel = req.header('japanese-level')
+
+  //kanji api has two grades for its most difficult kanji, choose one randomly 
+  if (japaneseLevel === "5") {
+    let possibleGrades = ["5","6"]
+    japaneseLevel = possibleGrades[Math.floor(Math.random()* possibleGrades.length)]
+  }
+
+  //Api config
+  const kanjiBaseUrl = 'https://kanjialive-api.p.rapidapi.com/api/public/'
+  const kanjiHeaders = {
+    'x-rapidapi-host': 'kanjialive-api.p.rapidapi.com',
+    'x-rapidapi-key': apiKey
+  } 
+
+  const kanjiOptions = {
     method: 'GET',
-    url: `https://kanjialive-api.p.rapidapi.com/api/public/kanji/${encodedChar}`,
-    headers: {
-      'x-rapidapi-host': 'kanjialive-api.p.rapidapi.com',
-      'x-rapidapi-key': apiKey
-    }
+    url:`${kanjiBaseUrl}search/advanced/`,
+    params: {grade: japaneseLevel},
+    headers: kanjiHeaders
   };
 
-    return axios.request(kanjiDetailOptions).then(response => homeData['kanjiDetails'] = response.data)
-})
+  const kanjiDetailOptions = {
+    method: 'GET',
+    url: `${kanjiBaseUrl}kanji/`,
+    headers: kanjiHeaders
+  };
 
-  let quoteOptions = {
+  const quoteOptions = {
     method: 'POST',
     url: 'https://motivational-quotes1.p.rapidapi.com/motivation',
     headers: {
@@ -53,11 +52,27 @@ router.get("/", (req, res) =>{
     data: {key1: 'value', key2: 'value'}
   };
 
-  const quote = async() => axios.request(quoteOptions).then(response =>{
-    return homeData['quote'] = response.data
-  })
+  //Api Calls
+  var homeData = {}; 
   
-  Promise.all([kanji(), quote()]).then(()=>res.json(homeData))
+  const kanji = async() => axios.request(kanjiOptions)
+  .then(response =>{
+    const kanjiAvailable = response.data.length
+    const randomKanji = Math.floor((Math.random()*kanjiAvailable))  
+    return homeData['kanji'] =  response.data[randomKanji].kanji.character
+  })
+  .then(async() => {
+    let char =  homeData['kanji']
+    let encodedChar = encodeURI(char)
+    kanjiDetailOptions['url'] = kanjiDetailOptions['url'] + encodedChar
+    return axios.request(kanjiDetailOptions).then(response => homeData['kanjiDetails'] = response.data)
+  })
+
+  const quote = async() => axios.request(quoteOptions)
+  .then(response => homeData['quote'] = response.data)
+  
+  await Promise.all([kanji(), quote()])
+  .then(()=>res.json(homeData))
 })
 
 module.exports = router; 

@@ -11,11 +11,13 @@ const userSchema = new mongoose.Schema({
     }, 
     password: {
         type: String, 
-        required: true
+        required: true, 
+        select: false
     }, 
-    rpassword : {
-        type: String
-    }, 
+    japaneseLevel :{
+        type: Number,
+        default: 1
+    },
     date: {
         type: Date, 
         default: Date.now

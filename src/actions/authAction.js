@@ -1,5 +1,6 @@
 import instance from '../axiosInstance/axios';
 import * as actionType from './types'; 
+import { getUser} from '../actions/userAction'
 
 export const register = (userInfo, setRegisterError) => async dispatch => { 
     instance.post('/users/register', userInfo)
@@ -8,6 +9,8 @@ export const register = (userInfo, setRegisterError) => async dispatch => {
         dispatch({
             type: actionType.registerSuccess,
         })
+        dispatch(getUser(res.data))
+        return {}
      })
     .catch(error =>{
         setRegisterError({"registerError": error.response.data})
@@ -25,6 +28,7 @@ export const login = (userInfo, setLoginError) =>async dispatch =>{
         dispatch({
             type: actionType.loginSuccess,
         })
+        dispatch(getUser(res.data))
         return {}
     })
     .catch(error => {
