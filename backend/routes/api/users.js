@@ -142,4 +142,24 @@ router.patch('/changeUserPassword', authToken, async(req, res)=>{
     }
 })
 
+// @route   DELETE route
+// @desc    Delete a user by id
+// @access  Private
+router.delete('/deleteUser', authToken, async(req, res)=>{
+    try{
+        const oldpassword = req.data.password
+        const userID = mongoose.Types.ObjectId(req.id)
+        const user = await User.findById(userID).select("+password")
+
+        const passwordsMatch = await bcrypt.compare(oldpassword, user.password)
+        if (!passwordsMatch){
+            return res.status(400).send("Password is incorrect")
+        } 
+
+        await User.findByIdAndDelete(userID)
+        res.status(200).json("User deleted")
+    }catch(err){
+        res.status(500).send(err)
+    }
+})
 module.exports = router;
