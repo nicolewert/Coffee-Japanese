@@ -26,7 +26,7 @@ const ChangePasswordForm = () =>{
             <input 
                 id = "oldpassword"
                 className = {classes.formInput}
-                type = "text" 
+                type = "password" 
                 name = "oldpassword"
                 value = {passwordInfo.oldpassword}
                 onChange = {handleChange}
@@ -39,7 +39,7 @@ const ChangePasswordForm = () =>{
             <input 
                 id = "newpassword"
                 className = {classes.formInput}
-                type = "text" 
+                type = "password" 
                 name = "newpassword"
                 value = {passwordInfo.newpassword}
                 onChange = {handleChange}
@@ -52,7 +52,7 @@ const ChangePasswordForm = () =>{
             <input 
                 id = "rpassword"
                 className = {classes.formInput}
-                type = "text" 
+                type = "password" 
                 name = "rpassword"
                 value = {passwordInfo.rpassword}
                 onChange = {handleChange}
