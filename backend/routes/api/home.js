@@ -55,24 +55,26 @@ router.get("/", authToken, async(req, res) =>{
   //Api Calls
   var homeData = {}; 
   
-  const kanji = async() => axios.request(kanjiOptions)
-  .then(response =>{
-    const kanjiAvailable = response.data.length
-    const randomKanji = Math.floor((Math.random()*kanjiAvailable))  
-    return homeData['kanji'] =  response.data[randomKanji].kanji.character
-  })
-  .then(async() => {
-    let char =  homeData['kanji']
-    let encodedChar = encodeURI(char)
-    kanjiDetailOptions['url'] = kanjiDetailOptions['url'] + encodedChar
-    return axios.request(kanjiDetailOptions).then(response => homeData['kanjiDetails'] = response.data)
-  })
+  while(Object.keys(homeData).length<3){
+    const kanji = async() => axios.request(kanjiOptions)
+    .then(response =>{
+      const kanjiAvailable = response.data.length
+      const randomKanji = Math.floor((Math.random()*kanjiAvailable))  
+      return homeData['kanji'] =  response.data[randomKanji].kanji.character
+    })
+    .then(async() => {
+      let char =  homeData['kanji']
+      let encodedChar = encodeURI(char)
+      kanjiDetailOptions['url'] = kanjiDetailOptions['url'] + encodedChar
+      return axios.request(kanjiDetailOptions).then(response => homeData['kanjiDetails'] = response.data)
+    })
 
-  const quote = async() => axios.request(quoteOptions)
-  .then(response => homeData['quote'] = response.data)
+    const quote = async() => axios.request(quoteOptions)
+    .then(response => homeData['quote'] = response.data)
   
-  await Promise.all([kanji(), quote()])
-  .then(()=>res.json(homeData))
+    await Promise.all([kanji(), quote()])
+    .then(()=>res.json(homeData))
+  }
 })
 
 module.exports = router; 

@@ -7,6 +7,7 @@ import Footer from '../../components/Footer/Footer'
 import instance from '../../axiosInstance/axios'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { authFailureError } from '../../middleware/authFailureCheck'
 
 const Home = () =>{
     const navigate = useNavigate()
@@ -33,7 +34,7 @@ const Home = () =>{
             setHomeData(res.data)
         })
         .catch(error =>{
-            console.log(error)
+            authFailureError(error)
         })
     }, [token, japaneseLevel])
 

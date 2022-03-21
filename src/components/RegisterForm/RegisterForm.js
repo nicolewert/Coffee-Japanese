@@ -6,9 +6,10 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const RegisterForm = () => {
-    const {handleChange, userInfo, handleSubmit, errors} = useRegisterForm(validate)
+    const {handleChange, userInfo, handleSubmit} = useRegisterForm(validate)
     const isAuthenticated = useSelector((state)=>{return state.auth.isAuthenticated})
     const user = useSelector(state=>{return state.user.user})
+    const error = useSelector(state =>{return state.error.error})
 
     let navigate = useNavigate()
     useEffect(()=>{
@@ -29,7 +30,7 @@ const RegisterForm = () => {
                     value = {userInfo.username}
                     onChange = {handleChange}
                 />
-                {errors.username && <p>{errors.username}</p>}
+                {error && error.username && <p>{error.username}</p>}
             </div>
 
             <div className={classes.formItem}>
@@ -42,7 +43,7 @@ const RegisterForm = () => {
                     value = {userInfo.email}
                     onChange = {handleChange} 
                 />
-                {errors.email && <p>{errors.email}</p>}
+                {error && error.email && <p>{error.email}</p>}
             </div>
 
             <div className={classes.formItem}>
@@ -55,7 +56,7 @@ const RegisterForm = () => {
                     value = {userInfo.password} 
                     onChange = {handleChange}
                 />
-                {errors.password && <p>{errors.password}</p>}
+                {error && error.password && <p>{error.password}</p>}
             </div>
             <div className={classes.formItem}>
                 <label className={classes.formLabel}>Confirm Password</label>
@@ -67,13 +68,13 @@ const RegisterForm = () => {
                     value = {userInfo.rpassword}
                     onChange = {handleChange}
                 />
-                {errors.rpassword && <p>{errors.rpassword}</p>}
+                {error && error.rpassword && <p>{error.rpassword}</p>}
             </div>
             
             <div className={classes.formItem}>
                 <input className={classes.signUpButton} type="submit" value="Sign Up"/>
             </div>
-            { errors.registerError &&<div className={classes.submitError}>{errors.registerError}</div>}
+            { error && error.registerError &&<div className={classes.submitError}>{error.registerError}</div>}
         </form>
     ); 
 }

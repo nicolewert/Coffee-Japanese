@@ -6,9 +6,10 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const LoginForm =() =>{
-    const {handleChange, userInfo, handleSubmit, errors} = useLoginForm(validate)
+    const {handleChange, userInfo, handleSubmit} = useLoginForm(validate)
     const isAuthenticated = useSelector((state)=>{return state.auth.isAuthenticated})
     const user = useSelector(state =>{return state.user.user})
+    const error = useSelector(state =>{return state.error.error})
 
     let navigate = useNavigate()
     useEffect(() =>{
@@ -29,7 +30,7 @@ const LoginForm =() =>{
                     value={userInfo.email}
                     onChange={handleChange}
                 />
-                {errors.email && <p className={classes.inputError}>{errors.email}</p>}
+                {error && error.email && <p className={classes.inputError}>{error.email}</p>}
             </div>
 
             <div className={classes.formItem}>
@@ -42,14 +43,14 @@ const LoginForm =() =>{
                     value={userInfo.password}
                     onChange={handleChange}
                 />
-                {errors.password && <p className={classes.inputError}>{errors.password}</p>}
+                {error && error.password && <p className={classes.inputError}>{error.password}</p>}
             </div>
 
             <div className={classes.formItem}>
                 <input className={classes.loginButton} type="submit" value="Login"/>
                 {/* <p className={classes.smalltext}>Forgot Password?</p> */}
             </div>
-            {errors.loginError && <div className={classes.submitError}>{errors.loginError}</div>}
+            {error && error.loginError && <div className={classes.submitError}>{error.loginError}</div>}
     </form>
     ); 
 }
