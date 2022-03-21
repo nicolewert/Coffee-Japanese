@@ -1,6 +1,7 @@
 import {useState} from 'react'
 import { useDispatch } from 'react-redux'
 import { login } from '../../actions/authAction'
+import { error } from '../../actions/types'
 
 const useLoginForm = (validate) =>{
     const dispatch = useDispatch()
@@ -9,7 +10,6 @@ const useLoginForm = (validate) =>{
         email: "", 
         password: ""
     })
-    const [errors, setErrors] = useState({})
 
     const handleChange = e => {
         const {name, value} = e.target
@@ -19,21 +19,18 @@ const useLoginForm = (validate) =>{
         })
     }
 
-    const setLoginError = (error) =>{
-        setErrors(error)
-    } 
-
     const handleSubmit = async e =>{
         e.preventDefault()
+
         const errorsFound = await validate(userInfo)
-        setErrors(errorsFound)
+        dispatch({type: error, payload: errorsFound})
 
         if(Object.keys(errorsFound).length === 0){
-            dispatch(login(userInfo, setLoginError))
+            dispatch(login(userInfo))
         }
     }
 
-    return {handleChange, userInfo, handleSubmit, errors}
+    return {handleChange, userInfo, handleSubmit}
 }
 
 export default useLoginForm

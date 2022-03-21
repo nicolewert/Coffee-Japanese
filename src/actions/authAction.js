@@ -26,18 +26,21 @@ export const register = (userInfo) => async dispatch => {
 
 }
 
-export const login = (userInfo, setLoginError) =>async dispatch =>{
+export const login = (userInfo) =>async dispatch =>{
     instance.post('/auth/login', userInfo)
     .then(res =>{
         localStorage.setItem('token', res.data);
         dispatch({
             type: actionType.loginSuccess,
         })
+        dispatch({type: actionType.success})
         dispatch(getUser(res.data))
-        return {}
     })
     .catch(error => {
-        setLoginError({"loginError": error.response.data})
+        dispatch({
+            type: actionType.error,
+            payload: {"loginError": error.response.data}
+        })
         dispatch({
             type: actionType.authFailure,
         })
