@@ -1,10 +1,19 @@
-import React from 'react'; 
-import RegisterForm from '../../components/RegisterForm/RegisterForm';
+import React, { useEffect } from 'react'
+import RegisterForm from '../../components/RegisterForm/RegisterForm'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoffee } from '@fortawesome/free-solid-svg-icons'
-import classes from './Register.module.css'; 
+import classes from './Register.module.css' 
+import { errorReset } from '../../actions/types'
+import { useDispatch } from 'react-redux'
 
 const Register = () => {
+    
+    let dispatch = useDispatch()
+    useEffect(()=>{
+        dispatch({
+            type: errorReset
+        })
+    })
 
     return(
         <div className={classes.container}>
@@ -18,4 +27,4 @@ const Register = () => {
     );
 }
 
-export default Register; 
+export default Register
